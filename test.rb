@@ -1,73 +1,44 @@
-require 'pry' 
 
-def english_number (number)
-  if number < 0
-    return "must be > 0"
-  end
-  if number == 0
-    return zero
-  end
+filename = "bdays.txt"
 
-  num_string = " " 
-  
-  
-  ones_place = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-  tens_place = ["ten", "twenty", "thirty", "forty","fifty","sixty","seventy",
-  "eighty","ninety"]
-  teenagers = ["eleven", "twelve", "thirteen","fourteen","fifteen","sixteen",
-  "seventeen","eighteen","nineteen"]
-  
-    
-  binding.pry
-  
-  left = number 
-  write = left/100
-  left = left - write*100
-  
-  if write > 0
-    hundreds = english_number(write)
-    num_string = num_string + hundreds + " hundred"
-    if left > 0
-      num_string = num_string + " "
-    end
-  end
-  
-  write = left/10
-  left = left - write*10
-  
-  if write > 0
-      if ((write == 1) and (left > 0))
-        num_string = num_string + teenagers[left - 1]
-        left = 0
-      else
-        num_string = num_string + tens_place[write - 1]
-      end
-      
-      if left > 0 
-        num_string = num_string + "-"
-      end
-  end
-
-  write = left
-  left = 0
-  
-  if write > 0
-    num_string = num_string + ones_place[write - 1]
-  end
-    
-  num_string
-  
+=begin
+File.foreach(filename).with_index do |line, line_num|
+   puts "#{line_num}: #{line}"
 end
 
+=end
 
-puts english_number(377)
-#puts english_number(56)
-#puts english_number(10)
+names_hash = Hash.new
 
 
+File.readlines(filename).each do |line|
+  line.chomp
+ # puts "#{line}"
+ 
+ #the next line splits the lines on commas 
+ #and creates 2 array elements. Anything 
+ #after the first element goes into the 2nd.
+  split_line = line.split(",", 2) 
   
-  
-  
+#  puts split_line
+  names_hash[split_line[0].downcase] = split_line[1]
+end
+
+ names_hash.each { |name, bday| puts "#{name}: #{bday}" }
+ 
+puts "Enter a name to get their bday" 
+input = gets.chomp
+
+ names_hash.each do 
+   if |name| == input 
+     puts |bday|
+    else
+      puts "Name not found"
+    end
+  end
+
+
+
 
 
 
